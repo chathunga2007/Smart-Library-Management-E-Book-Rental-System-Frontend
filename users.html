@@ -11,7 +11,6 @@
 <body>
   <div class="app-container">
     
-    <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div class="sidebar-header">
         <div class="brand-logo">
@@ -74,14 +73,12 @@
       </div>
     </aside>
 
-    <!-- Main Content Area -->
     <main class="main-wrapper">
       
-      <!-- Header -->
       <header class="header">
         <div class="header-title">
           <h1>User Account Management</h1>
-          <p>Manage User Accounts, Roles, and Access Privileges (`POST /api/users/saveUser`, `PUT /api/users`)</p>
+          <p>Manage User Accounts, Roles, and Access Privileges</p>
         </div>
 
         <div class="header-actions">
@@ -91,10 +88,8 @@
         </div>
       </header>
 
-      <!-- Content Body -->
       <div class="content-body">
         
-        <!-- Search User by ID -->
         <div class="card-box" style="padding: 16px 24px; margin-bottom: 24px;">
           <form onsubmit="searchUserById(); return false;" style="display: flex; gap: 16px; align-items: center; width: 100%;">
             <div class="search-box" style="flex: 1;">
@@ -111,10 +106,9 @@
           </form>
         </div>
 
-        <!-- Users Table -->
         <div class="card-box">
           <div class="card-header">
-            <h2><i class="fa-solid fa-users"></i> Registered System Users (`UserDTO`)</h2>
+            <h2><i class="fa-solid fa-users"></i> Registered System Users</h2>
             <button class="btn btn-secondary btn-sm" onclick="loadUsers()"><i class="fa-solid fa-sync"></i> Refresh List</button>
           </div>
 
@@ -143,7 +137,6 @@
     </main>
   </div>
 
-  <!-- ADD USER MODAL -->
   <div class="modal-overlay" id="modal-add-user">
     <div class="modal-card">
       <div class="modal-header">
@@ -154,22 +147,22 @@
       <form id="form-add-user" onsubmit="saveUserDetails(); return false;">
         <div class="form-grid">
           <div class="form-group full-width">
-            <label for="user-username">Username (`username`)</label>
+            <label for="user-username">Username</label>
             <input type="text" id="user-username" class="form-control" placeholder="Enter username" required>
           </div>
 
           <div class="form-group full-width">
-            <label for="user-email">Email Address (`email`)</label>
+            <label for="user-email">Email Address</label>
             <input type="email" id="user-email" class="form-control" placeholder="user@domain.com" required>
           </div>
 
           <div class="form-group full-width">
-            <label for="user-password">Password (`password`)</label>
+            <label for="user-password">Password</label>
             <input type="password" id="user-password" class="form-control" placeholder="Set user password" required>
           </div>
 
           <div class="form-group">
-            <label for="user-role">Role (`Role`)</label>
+            <label for="user-role">Role</label>
             <select id="user-role" class="form-control" required>
               <option value="MEMBER">MEMBER</option>
               <option value="LIBRARIAN">LIBRARIAN</option>
@@ -178,7 +171,7 @@
           </div>
 
           <div class="form-group">
-            <label for="user-status">Status (`UserStatus`)</label>
+            <label for="user-status">Status</label>
             <select id="user-status" class="form-control" required>
               <option value="ACTIVE">ACTIVE</option>
               <option value="INACTIVE">INACTIVE</option>
@@ -195,7 +188,6 @@
     </div>
   </div>
 
-  <!-- EDIT USER MODAL -->
   <div class="modal-overlay" id="modal-edit-user">
     <div class="modal-card">
       <div class="modal-header">
@@ -206,12 +198,12 @@
       <form id="form-edit-user" onsubmit="updateUserDetails(); return false;">
         <div class="form-grid">
           <div class="form-group">
-            <label for="edit-user-id">User ID (`id`)</label>
+            <label for="edit-user-id">User ID</label>
             <input type="number" id="edit-user-id" class="form-control" readonly required>
           </div>
 
           <div class="form-group">
-            <label for="edit-user-role">Role (`Role`)</label>
+            <label for="edit-user-role">Role</label>
             <select id="edit-user-role" class="form-control" required>
               <option value="MEMBER">MEMBER</option>
               <option value="LIBRARIAN">LIBRARIAN</option>
@@ -220,22 +212,22 @@
           </div>
 
           <div class="form-group full-width">
-            <label for="edit-user-username">Username (`username`)</label>
+            <label for="edit-user-username">Username</label>
             <input type="text" id="edit-user-username" class="form-control" required>
           </div>
 
           <div class="form-group full-width">
-            <label for="edit-user-email">Email (`email`)</label>
+            <label for="edit-user-email">Email</label>
             <input type="email" id="edit-user-email" class="form-control" required>
           </div>
 
           <div class="form-group full-width">
-            <label for="edit-user-password">Password (`password`)</label>
+            <label for="edit-user-password">Password</label>
             <input type="password" id="edit-user-password" class="form-control" placeholder="Leave blank to keep existing">
           </div>
 
           <div class="form-group full-width">
-            <label for="edit-user-status">Status (`UserStatus`)</label>
+            <label for="edit-user-status">Status</label>
             <select id="edit-user-status" class="form-control" required>
               <option value="ACTIVE">ACTIVE</option>
               <option value="INACTIVE">INACTIVE</option>
