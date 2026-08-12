@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Library System - Register Account</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      
+      <div class="auth-brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-book-bookmark"></i>
+        </div>
+        <h2>Smart Library</h2>
+        <p>Create a New Portal Account</p>
+      </div>
+
+      <form id="form-register" onsubmit="handleRegister(); return false;">
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label for="reg-username"><i class="fa-solid fa-user"></i> Username</label>
+          <input type="text" id="reg-username" name="username" class="form-control" placeholder="Choose a username" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email Address</label>
+          <input type="email" id="reg-email" name="email" class="form-control" placeholder="user@library.com" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label for="reg-password"><i class="fa-solid fa-lock"></i> Password</label>
+          <input type="password" id="reg-password" name="password" class="form-control" placeholder="Create strong password" required>
+        </div>
+
+        <div class="form-grid" style="margin-bottom: 24px;">
+          <div class="form-group">
+            <label for="reg-role"><i class="fa-solid fa-user-shield"></i> System Role</label>
+            <select id="reg-role" name="role" class="form-control" required>
+              <option value="MEMBER">MEMBER</option>
+              <option value="LIBRARIAN">LIBRARIAN</option>
+              <option value="ADMIN">ADMIN</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-status"><i class="fa-solid fa-toggle-on"></i> Account Status</label>
+            <select id="reg-status" name="userStatus" class="form-control" required>
+              <option value="ACTIVE">ACTIVE</option>
+              <option value="INACTIVE">INACTIVE</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+          <i class="fa-solid fa-user-plus"></i> Create Account
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 13px;">
+        <span style="color: var(--text-dim);">Already have an account? </span>
+        <a href="login.html" style="color: var(--primary-light); font-weight: 600; text-decoration: none;">Sign In</a>
+      </div>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 12px; color: var(--text-dim);">
+        Smart Library System &bull; Account Registration
+      </div>
+
+    </div>
+  </div>
+
+  <script src="JS/CommonNav.js"></script>
+  <script src="JS/Login.js"></script>
+</body>
+</html>
