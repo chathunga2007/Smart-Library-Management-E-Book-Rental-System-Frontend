@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Library System - Analytics Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <i class="fa-solid fa-book-bookmark"></i>
+        </div>
+        <div class="brand-text">
+          <h2>Smart Library</h2>
+          <span>E-BOOK SYSTEM</span>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-label">Navigation</li>
+        <li>
+          <a href="index.html" class="nav-link active">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="books.html" class="nav-link">
+            <i class="fa-solid fa-book"></i>
+            <span>Book Catalog</span>
+          </a>
+        </li>
+        <li>
+          <a href="rentals.html" class="nav-link">
+            <i class="fa-solid fa-hand-holding-hand"></i>
+            <span>Rentals & Returns</span>
+          </a>
+        </li>
+        <li>
+          <a href="fines.html" class="nav-link">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <span>Fine Management</span>
+          </a>
+        </li>
+
+        <li class="sidebar-label">Administration</li>
+        <li>
+          <a href="users.html" class="nav-link">
+            <i class="fa-solid fa-users-gear"></i>
+            <span>User Accounts</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="handleLogout()" class="nav-link" style="color: var(--accent-rose);">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Sign Out</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-user">
+        <div class="user-avatar" id="user-avatar-badge">US</div>
+        <div class="user-info">
+          <h4 id="user-display-name">Active User</h4>
+          <p id="user-display-id">ID: #--</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-wrapper">
+      
+      <header class="header">
+        <div class="header-title">
+          <h1>System Overview & Analytics</h1>
+          <p>Real-time Smart Library Management Performance Metrics</p>
+        </div>
+
+        <div class="header-actions">
+          <form action="books.html" method="GET" class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" name="query" placeholder="Search catalog by title/author...">
+          </form>
+
+          <a href="books.html" class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-plus"></i> Add Book
+          </a>
+        </div>
+      </header>
+
+      <div class="content-body">
+        
+        <div class="metrics-grid">
+          
+          <div class="metric-card" style="--card-accent: var(--primary);">
+            <div class="metric-info">
+              <h3 id="stat-total-books">0</h3>
+              <p>Total Cataloged Books</p>
+            </div>
+            <div class="metric-icon" style="background: rgba(139, 92, 246, 0.2); color: var(--primary-light);">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+          </div>
+
+          <div class="metric-card" style="--card-accent: var(--accent-cyan);">
+            <div class="metric-info">
+              <h3 id="stat-active-rentals">0</h3>
+              <p>Active Rental Issues</p>
+            </div>
+            <div class="metric-icon" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </div>
+          </div>
+
+          <div class="metric-card" style="--card-accent: var(--accent-amber);">
+            <div class="metric-info">
+              <h3 id="stat-unpaid-fines">0</h3>
+              <p>Pending Unpaid Fines</p>
+            </div>
+            <div class="metric-icon" style="background: rgba(245, 158, 11, 0.2); color: var(--accent-amber);">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+          </div>
+
+          <div class="metric-card" style="--card-accent: var(--accent-emerald);">
+            <div class="metric-info">
+              <h3 id="stat-total-users">0</h3>
+              <p>Registered Members</p>
+            </div>
+            <div class="metric-icon" style="background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald);">
+              <i class="fa-solid fa-users"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-box">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-bolt"></i> Quick Operations</h2>
+          </div>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <a href="books.html" class="btn btn-secondary">
+              <i class="fa-solid fa-plus-circle" style="color: var(--primary-light);"></i> Add New Book
+            </a>
+            <a href="rentals.html" class="btn btn-secondary">
+              <i class="fa-solid fa-cart-plus" style="color: var(--accent-cyan);"></i> Issue Book Rental
+            </a>
+            <a href="fines.html" class="btn btn-secondary">
+              <i class="fa-solid fa-hand-holding-dollar" style="color: var(--accent-amber);"></i> Process Fine Payment
+            </a>
+            <a href="users.html" class="btn btn-secondary">
+              <i class="fa-solid fa-user-plus" style="color: var(--accent-emerald);"></i> Register System User
+            </a>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-clock-rotate-left"></i> Recent Rental Activities</h2>
+            <a href="rentals.html" class="btn btn-secondary btn-sm">View All Rentals</a>
+          </div>
+
+          <div class="table-responsive">
+            <table class="custom-table" id="recent-rentals-table">
+              <thead>
+                <tr>
+                  <th>Rental ID</th>
+                  <th>User Details</th>
+                  <th>Book Details</th>
+                  <th>Borrow Date</th>
+                  <th>Due Date</th>
+                  <th>Return Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recent-rentals-tbody">
+                <tr>
+                  <td colspan="7" style="text-align: center; color: var(--text-dim);">Loading rental activity...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="JS/CommonNav.js"></script>
+  <script src="JS/Dashboard.js"></script>
+</body>
+</html>
