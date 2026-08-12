@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Library System - Book Catalog</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <i class="fa-solid fa-book-bookmark"></i>
+        </div>
+        <div class="brand-text">
+          <h2>Smart Library</h2>
+          <span>E-BOOK SYSTEM</span>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-label">Navigation</li>
+        <li>
+          <a href="index.html" class="nav-link">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="books.html" class="nav-link active">
+            <i class="fa-solid fa-book"></i>
+            <span>Book Catalog</span>
+          </a>
+        </li>
+        <li>
+          <a href="rentals.html" class="nav-link">
+            <i class="fa-solid fa-hand-holding-hand"></i>
+            <span>Rentals & Returns</span>
+          </a>
+        </li>
+        <li>
+          <a href="fines.html" class="nav-link">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <span>Fine Management</span>
+          </a>
+        </li>
+
+        <li class="sidebar-label">Administration</li>
+        <li>
+          <a href="users.html" class="nav-link">
+            <i class="fa-solid fa-users-gear"></i>
+            <span>User Accounts</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="handleLogout()" class="nav-link" style="color: var(--accent-rose);">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Sign Out</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-user">
+        <div class="user-avatar" id="user-avatar-badge">US</div>
+        <div class="user-info">
+          <h4 id="user-display-name">Active User</h4>
+          <p id="user-display-id">ID: #--</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-wrapper">
+      
+      <header class="header">
+        <div class="header-title">
+          <h1>Book Catalog & Inventory</h1>
+          <p>Manage E-Books, Stock Copies, and Statuses/p>
+        </div>
+
+        <div class="header-actions">
+          <button class="btn btn-primary" onclick="openAddBookModal()">
+            <i class="fa-solid fa-plus"></i> Add New Book
+          </button>
+        </div>
+      </header>
+
+      <div class="content-body">
+        
+        <div class="card-box" style="padding: 16px 24px; margin-bottom: 24px;">
+          <form onsubmit="searchBooks(); return false;" style="display: flex; gap: 16px; align-items: center; width: 100%;">
+            <div class="search-box" style="flex: 1;">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="search-query" placeholder="Search by book title, author, or ISBN...">
+            </div>
+
+            <button type="submit" class="btn btn-secondary">
+              <i class="fa-solid fa-filter"></i> Search Catalog
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="loadBooks(); $('#search-query').val('');">
+              <i class="fa-solid fa-arrows-rotate"></i> Reset
+            </button>
+          </form>
+        </div>
+
+        <div class="card-box">
+          <div class="card-header">
+            <h2><i class="fa-solid fa-book"></i> Catalog Books List</h2>
+            <button class="btn btn-secondary btn-sm" onclick="loadBooks()"><i class="fa-solid fa-sync"></i> Refresh List</button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="custom-table" id="bookTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Book Title</th>
+                  <th>Author</th>
+                  <th>ISBN</th>
+                  <th>Category</th>
+                  <th>Total Copies</th>
+                  <th>Available Copies</th>
+                  <th>File Path</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="books-tbody">
+                <tr>
+                  <td colspan="10" style="text-align: center; color: var(--text-dim);">Loading books catalog...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modal-add-book">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-plus-circle" style="color: var(--primary-light);"></i> Add New Book</h3>
+        <button class="modal-close" onclick="closeModal('modal-add-book')">&times;</button>
+      </div>
+
+      <form id="form-add-book" onsubmit="saveBookDetails(); return false;">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="book-title">Book Title</label>
+            <input type="text" id="book-title" class="form-control" placeholder="Enter book title" required>
+          </div>
+
+          <div class="form-group">
+            <label for="book-author">Author</label>
+            <input type="text" id="book-author" class="form-control" placeholder="Author name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="book-isbn">ISBN Number</label>
+            <input type="text" id="book-isbn" class="form-control" placeholder="e.g. 978-0132350884" required>
+          </div>
+
+          <div class="form-group">
+            <label for="book-category">Category</label>
+            <input type="text" id="book-category" class="form-control" placeholder="e.g. Software Engineering" required>
+          </div>
+
+          <div class="form-group">
+            <label for="book-totalCopies">Total Copies</label>
+            <input type="number" id="book-totalCopies" class="form-control" min="1" value="1" required>
+          </div>
+
+          <div class="form-group">
+            <label for="book-availableCopies">Available Copies</label>
+            <input type="number" id="book-availableCopies" class="form-control" min="0" value="1" required>
+          </div>
+
+          <div class="form-group">
+            <label for="book-status">Status</label>
+            <select id="book-status" class="form-control" required>
+              <option value="AVAILABLE">AVAILABLE</option>
+              <option value="NOT_AVAILABLE">NOT_AVAILABLE</option>
+              <option value="DELETED">DELETED</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="book-filePath">E-Book File Path / Download URL</label>
+            <input type="text" id="book-filePath" class="form-control" placeholder="/uploads/ebooks/filename.pdf">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('modal-add-book')">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-edit-book">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-pen-to-square" style="color: var(--accent-cyan);"></i> Update Book</h3>
+        <button class="modal-close" onclick="closeModal('modal-edit-book')">&times;</button>
+      </div>
+
+      <form id="form-edit-book" onsubmit="updateBookDetails(); return false;">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="edit-book-id">Book ID</label>
+            <input type="number" id="edit-book-id" class="form-control" readonly required>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-book-status">Status</label>
+            <select id="edit-book-status" class="form-control" required>
+              <option value="AVAILABLE">AVAILABLE</option>
+              <option value="NOT_AVAILABLE">NOT_AVAILABLE</option>
+              <option value="DELETED">DELETED</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="edit-book-title">Book Title</label>
+            <input type="text" id="edit-book-title" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-book-author">Author</label>
+            <input type="text" id="edit-book-author" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-book-isbn">ISBN Number</label>
+            <input type="text" id="edit-book-isbn" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-book-category">Category</label>
+            <input type="text" id="edit-book-category" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-book-total">Total Copies</label>
+            <input type="number" id="edit-book-total" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-book-avail">Available Copies</label>
+            <input type="number" id="edit-book-avail" class="form-control" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="edit-book-file">File Path</label>
+            <input type="text" id="edit-book-file" class="form-control">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('modal-edit-book')">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Update Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="JS/CommonNav.js"></script>
+  <script src="JS/Book.js"></script>
+</body>
+</html>
