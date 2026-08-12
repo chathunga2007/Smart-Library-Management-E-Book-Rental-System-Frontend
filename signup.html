@@ -20,39 +20,35 @@
         <p>Create a New Portal Account</p>
       </div>
 
-      <form id="form-register" onsubmit="handleRegister(); return false;">
+      <form id="form-register" onsubmit="handleSignup(); return false;">
         <div class="form-group" style="margin-bottom: 14px;">
-          <label for="reg-username"><i class="fa-solid fa-user"></i> Username</label>
-          <input type="text" id="reg-username" name="username" class="form-control" placeholder="Choose a username" required>
+          <label for="username"><i class="fa-solid fa-user"></i> Username</label>
+          <input type="text" id="username" name="username" class="form-control" placeholder="Choose a username" required>
         </div>
 
         <div class="form-group" style="margin-bottom: 14px;">
-          <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email Address</label>
-          <input type="email" id="reg-email" name="email" class="form-control" placeholder="user@library.com" required>
+          <label for="email"><i class="fa-solid fa-envelope"></i> Email Address</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="user@library.com" required>
         </div>
 
         <div class="form-group" style="margin-bottom: 14px;">
-          <label for="reg-password"><i class="fa-solid fa-lock"></i> Password</label>
-          <input type="password" id="reg-password" name="password" class="form-control" placeholder="Create strong password" required>
+          <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Create strong password" required>
         </div>
 
-        <div class="form-grid" style="margin-bottom: 24px;">
-          <div class="form-group">
-            <label for="reg-role"><i class="fa-solid fa-user-shield"></i> System Role</label>
-            <select id="reg-role" name="role" class="form-control" required>
-              <option value="MEMBER">MEMBER</option>
-              <option value="LIBRARIAN">LIBRARIAN</option>
-              <option value="ADMIN">ADMIN</option>
-            </select>
-          </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label for="confirmPassword"><i class="fa-solid fa-lock"></i> Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm password" required>
+        </div>
 
-          <div class="form-group">
-            <label for="reg-status"><i class="fa-solid fa-toggle-on"></i> Account Status</label>
-            <select id="reg-status" name="userStatus" class="form-control" required>
-              <option value="ACTIVE">ACTIVE</option>
-              <option value="INACTIVE">INACTIVE</option>
-            </select>
-          </div>
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label for="role"><i class="fa-solid fa-user-shield"></i> System Role</label>
+          <select id="role" name="role" class="form-control" required>
+            <option value="">Select User Role...</option>
+            <option value="MEMBER">MEMBER</option>
+            <option value="LIBRARIAN">LIBRARIAN</option>
+            <option value="ADMIN">ADMIN</option>
+          </select>
         </div>
 
         <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
@@ -73,6 +69,6 @@
   </div>
 
   <script src="JS/CommonNav.js"></script>
-  <script src="JS/Login.js"></script>
+  <script src="JS/Signup.js"></script>
 </body>
 </html>
